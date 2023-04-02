@@ -11,6 +11,7 @@ const Wrapper = styled.button`
   padding: 12px;
   border-radius: 24px;
   color: var(--color-white);
+  user-select: none;
 
   &::before,
   &::after {
@@ -44,6 +45,11 @@ const Wrapper = styled.button`
   }
 
   cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  &:focus {
+    outline: 2px solid var(--color-white);
+    outline-offset: 4px;
+  }
 `;
 
 const GlassDecor = styled.div`
@@ -61,7 +67,7 @@ const ContentWrapper = styled.span`
   z-index: 3;
 `;
 
-function Button({ children }) {
+function Button({ children, ...props }) {
   const rotation = [
     ["var(--color-cyan)", "var(--color-cyan)", "var(--color-blue)"],
     ["var(--color-cyan)", "var(--color-blue)", "var(--color-blue)"],
@@ -90,6 +96,7 @@ function Button({ children }) {
       gradient={rotation[index]}
       gradient2={rotation[(index + 1) % rotation.length]}
       index={index}
+      {...props}
     >
       <GlassDecor />
       <ContentWrapper>{children}</ContentWrapper>

@@ -1,6 +1,7 @@
 import styled, { css } from "styled-components";
 import { hoverSupported } from "../hoverSupported";
 import ClickableWrapper from "../ClickableWrapper";
+import EmailSignUp from "../EmailSignUp";
 
 const Wrapper = styled.footer`
   width: 100%;
@@ -27,6 +28,7 @@ const Image = styled.img`
 const BottomRow = styled.div`
   display: flex;
   justify-content: space-between;
+  align-items: start;
 `;
 
 const RowEntry = styled.div`
@@ -46,7 +48,7 @@ const InfoIcon = styled.img`
 
 const EntryValue = styled.span`
   font-family: var(--font-primary);
-  font-size: ${13 / 16}rem;
+  font-size: ${(p) => (p.first ? 14 : 12) / 16}rem;
   font-weight: var(--font-weight-regular);
   color: var(--color-white);
   max-width: 285px;
@@ -60,22 +62,64 @@ const EntryWrapper = styled.div`
 
 const NavEntry = styled.a`
   text-decoration: none;
-  font-family: var(--font-primary);
+  font-family: var(--font-secondary);
   font-weight: var(--font-weight-regular);
-  font-size: ${14 / 16}rem;
+  font-size: ${12 / 16}rem;
   color: var(--color-white);
   border-radius: 4px;
+  width: max-content;
+
+  transition: all 0.3s ease-in-out;
+  &:focus {
+    outline: 2px solid var(--color-white);
+    outline-offset: 4px;
+  }
+
+  ${hoverSupported(css`
+    &:hover {
+      color: var(--color-cyan);
+    }
+  `)}
+`;
+
+const SocialWrapper = styled.div`
+  display: flex;
+  gap: 12px;
+  align-items: center;
+`;
+
+const SocialIcon = styled.img`
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  padding: 8px;
+`;
+
+const Link = styled.a`
+  border-radius: 50%;
+  border: 1px solid var(--color-white);
+  text-decoration: none;
+  width: 35px;
+  height: 35px;
 
   transition: all 0.3s ease-in-out;
   &:focus {
     outline: 2px solid var(--color-white);
     outline-offset: 2px;
   }
+
+  ${hoverSupported(css`
+    &:hover {
+      border-color: var(--color-cyan);
+    }
+  `)}
 `;
 
 function Footer() {
   return (
     <Wrapper>
+      <EmailSignUp />
+
       <LogoContainer>
         <Image src={"/frontendmentor_18/logo.svg"} alt={"logo footer image"} />
       </LogoContainer>
@@ -88,7 +132,7 @@ function Footer() {
               alt={"location footer image"}
             />
           </InfoIconContainer>
-          <EntryValue>
+          <EntryValue first={true}>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua
           </EntryValue>
@@ -182,6 +226,50 @@ function Footer() {
             <NavEntry>Privacy</NavEntry>
           </ClickableWrapper>
         </EntryWrapper>
+
+        <SocialWrapper aria-label={"social media button images"}>
+          <ClickableWrapper
+            href={"#"}
+            onClick={() => {
+              window.location = "#";
+            }}
+          >
+            <Link>
+              <SocialIcon
+                src={"/frontendmentor_18/facebook.svg"}
+                alt={"facebook button image"}
+              />
+            </Link>
+          </ClickableWrapper>
+
+          <ClickableWrapper
+            href={"#"}
+            onClick={() => {
+              window.location = "#";
+            }}
+          >
+            <Link>
+              <SocialIcon
+                src={"/frontendmentor_18/twitter.svg"}
+                alt={"twitter button image"}
+              />
+            </Link>
+          </ClickableWrapper>
+
+          <ClickableWrapper
+            href={"#"}
+            onClick={() => {
+              window.location = "#";
+            }}
+          >
+            <Link>
+              <SocialIcon
+                src={"/frontendmentor_18/instagram.svg"}
+                alt={"instagram button image"}
+              />
+            </Link>
+          </ClickableWrapper>
+        </SocialWrapper>
       </BottomRow>
     </Wrapper>
   );

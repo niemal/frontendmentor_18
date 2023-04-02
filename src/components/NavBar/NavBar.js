@@ -17,6 +17,13 @@ const LogoContainer = styled.a`
   text-decoration: none;
   width: 140px;
   height: 52px;
+  border-radius: 4px;
+
+  transition: all 0.3s ease-in-out;
+  &:focus {
+    outline: 2px solid var(--color-white);
+    outline-offset: 4px;
+  }
 `;
 
 const LogoImage = styled.img`
@@ -49,6 +56,12 @@ const NavEntry = styled.a`
   font-size: ${12 / 16}rem;
   width: max-content;
   transition: all 0.3s ease-in-out;
+  border-radius: 4px;
+
+  &:focus {
+    outline: 2px solid var(--color-white);
+    outline-offset: 4px;
+  }
 
   ${hoverSupported(css`
     &:hover ${HoverLine} {
@@ -73,7 +86,12 @@ const SvgContainer = styled.svg`
 function NavBar() {
   return (
     <Wrapper>
-      <ClickableWrapper href={"#"}>
+      <ClickableWrapper
+        href={"/frontendmentor_18/"}
+        onClick={() => {
+          window.location = "/frontendmentor_18/";
+        }}
+      >
         <LogoContainer>
           <LogoImage
             src={"/frontendmentor_18/logo.svg"}
@@ -82,7 +100,12 @@ function NavBar() {
         </LogoContainer>
       </ClickableWrapper>
       <NavWrapper aria-label={"website navigation menu"}>
-        <ClickableWrapper href={"#"}>
+        <ClickableWrapper
+          href={"#"}
+          onClick={() => {
+            window.location = "#";
+          }}
+        >
           <NavEntry>
             Features
             <SvgContainer>
@@ -90,7 +113,12 @@ function NavBar() {
             </SvgContainer>
           </NavEntry>
         </ClickableWrapper>
-        <ClickableWrapper href={"#"}>
+        <ClickableWrapper
+          href={"#"}
+          onClick={() => {
+            window.location = "#";
+          }}
+        >
           <NavEntry>
             Team
             <SvgContainer>
@@ -98,7 +126,12 @@ function NavBar() {
             </SvgContainer>
           </NavEntry>
         </ClickableWrapper>
-        <ClickableWrapper href={"#"}>
+        <ClickableWrapper
+          href={"#"}
+          onClick={() => {
+            window.location = "#";
+          }}
+        >
           <NavEntry>
             Sign In
             <SvgContainer>

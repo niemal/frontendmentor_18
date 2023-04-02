@@ -59,6 +59,12 @@ const LinkWrapper = styled.a`
   color: var(--color-cyan);
   transition: all 0.3s ease-in-out;
 
+  border-radius: 4px;
+  &:focus {
+    outline: 2px solid var(--color-white);
+    outline-offset: 4px;
+  }
+
   ${hoverSupported(css`
     &:hover {
       gap: 24px;
@@ -114,7 +120,12 @@ function StayProductive() {
           for live collaboration. No email attachments required.
         </Desc>
 
-        <ClickableWrapper href={"#"}>
+        <ClickableWrapper
+          href={"#"}
+          onClick={() => {
+            window.location = "#";
+          }}
+        >
           <LinkWrapper>
             <LinkText>See how Fylo works</LinkText>
             <LinkIcon
