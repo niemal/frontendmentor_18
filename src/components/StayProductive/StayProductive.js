@@ -18,6 +18,7 @@ const Wrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  gap: 52px;
   background-color: var(--color-dark-blue-background);
 
   @media ${QUERIES.tabletAndSmaller} {
