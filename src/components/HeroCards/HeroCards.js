@@ -2,6 +2,7 @@ import styled from "styled-components";
 import React, { useState, useEffect } from "react";
 import { motion, useAnimation } from "framer-motion";
 import { InView } from "react-intersection-observer";
+import { QUERIES } from "../constants";
 
 const Wrapper = styled.div`
   position: relative;
@@ -12,6 +13,12 @@ const Wrapper = styled.div`
   flex-wrap: wrap;
   z-index: 3;
   margin: 0 auto;
+
+  @media ${QUERIES.tabletAndSmaller} {
+    padding: 0px 24px;
+    max-width: 100%;
+    gap: 72px;
+  }
 `;
 
 const CardWrapper = styled.div`

@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { QUERIES } from "../constants";
 
 const Wrapper = styled.div`
   position: relative;
@@ -12,6 +13,10 @@ const Wrapper = styled.div`
   align-items: center;
   gap: 32px;
   background-color: var(--color-dark-blue-background);
+
+  @media ${QUERIES.tabletAndSmaller} {
+    flex-wrap: wrap;
+  }
 `;
 
 const QuotesIcon = styled.img`

@@ -3,6 +3,7 @@ import { isMobile } from "react-device-detect";
 import HeroCards from "../HeroCards";
 import StayProductive from "../StayProductive";
 import Testimonials from "../Testimonials";
+import { QUERIES } from "../constants";
 
 const Wrapper = styled.section`
   position: relative;
@@ -20,6 +21,10 @@ const BackgroundContainer = styled.div`
   left: 0px;
   width: 100%;
   z-index: 2;
+
+  @media ${QUERIES.tabletAndSmaller} {
+    top: -230px;
+  }
 `;
 
 const Image = styled.img`

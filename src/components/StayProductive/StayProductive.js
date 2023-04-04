@@ -5,6 +5,7 @@ import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { InView } from "react-intersection-observer";
 import { useInterval } from "../useInterval";
+import { QUERIES } from "../constants";
 
 const Wrapper = styled.div`
   position: relative;
@@ -17,11 +18,16 @@ const Wrapper = styled.div`
   justify-content: center;
   align-items: center;
   background-color: var(--color-dark-blue-background);
+
+  @media ${QUERIES.tabletAndSmaller} {
+    flex-direction: column;
+    gap: 32px;
+  }
 `;
 
 const ImageContainer = styled.div`
-  width: 600px;
-  height: 400px;
+  width: 500px;
+  height: 380px;
   transition: all 1.5s ease-in-out;
 
   transform: translateY(${(p) => p.offset}px);
@@ -38,6 +44,10 @@ const TextWrapper = styled.div`
   flex-direction: column;
   gap: 16px;
   max-width: 484px;
+
+  @media ${QUERIES.tabletAndSmaller} {
+    align-items: center;
+  }
 `;
 
 const Title = styled.h1`

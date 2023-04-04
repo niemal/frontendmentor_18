@@ -2,6 +2,7 @@ import styled, { css } from "styled-components";
 import { hoverSupported } from "../hoverSupported";
 import ClickableWrapper from "../ClickableWrapper";
 import EmailSignUp from "../EmailSignUp";
+import { QUERIES } from "../constants";
 
 const Wrapper = styled.footer`
   width: 100%;
@@ -13,6 +14,10 @@ const Wrapper = styled.footer`
   padding-left: 94px;
 
   background-color: var(--color-dark-blue-footer-background);
+
+  @media ${QUERIES.tabletAndSmaller} {
+    align-items: center;
+  }
 `;
 
 const LogoContainer = styled.div`
@@ -29,6 +34,13 @@ const BottomRow = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: start;
+
+  @media ${QUERIES.tabletAndSmaller} {
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+    gap: 32px;
+  }
 `;
 
 const RowEntry = styled.div`
@@ -58,6 +70,11 @@ const EntryWrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 8px;
+
+  @media ${QUERIES.tabletAndSmaller} {
+    align-self: center;
+    width: 160px;
+  }
 `;
 
 const NavEntry = styled.a`
@@ -86,6 +103,10 @@ const SocialWrapper = styled.div`
   display: flex;
   gap: 12px;
   align-items: center;
+
+  @media ${QUERIES.tabletAndSmaller} {
+    align-self: center;
+  }
 `;
 
 const SocialIcon = styled.img`
