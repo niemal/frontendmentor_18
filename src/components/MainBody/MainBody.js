@@ -12,6 +12,7 @@ const Wrapper = styled.main`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  overflow: hidden;
 `;
 
 function MainBody() {

@@ -1,6 +1,10 @@
 import styled, { css } from "styled-components";
 import ClickableWrapper from "../ClickableWrapper";
 import { hoverSupported } from "../hoverSupported";
+import React, { useState } from "react";
+import { motion } from "framer-motion";
+import { InView } from "react-intersection-observer";
+import { useInterval } from "../useInterval";
 
 const Wrapper = styled.div`
   position: relative;
@@ -18,6 +22,9 @@ const Wrapper = styled.div`
 const ImageContainer = styled.div`
   width: 600px;
   height: 400px;
+  transition: all 1.5s ease-in-out;
+
+  transform: translateY(${(p) => p.offset}px);
 `;
 
 const Image = styled.img`
@@ -100,41 +107,108 @@ const LinkIcon = styled.img`
   `)}
 `;
 
+const imageContainerVariants = {
+  hidden: { x: -200, opacity: 0 },
+  visible: { x: 0, opacity: 1, transition: { duration: 0.7, ease: "easeOut" } },
+};
+
+const textWrapperVariants = {
+  hidden: { x: 200, opacity: 0 },
+  visible: { x: 0, opacity: 1, transition: { duration: 0.7, ease: "easeOut" } },
+};
+
+const letterAnimation = {
+  initial: { y: 20, opacity: 0 },
+  animate: (custom) => ({
+    y: 0,
+    opacity: 1,
+    transition: {
+      delay: custom.index * 0.06,
+      duration: 0.6,
+      ease: "easeInOut",
+    },
+  }),
+};
+
 function StayProductive() {
+  const [floatingOffset, setFloatingOffset] = useState(0);
+
+  useInterval(() => {
+    setFloatingOffset((prevOffset) => (prevOffset === 4 ? -4 : 4));
+  }, 1500);
+
   return (
     <Wrapper>
-      <ImageContainer>
-        <Image
-          src={"/frontendmentor_18/illustration-stay-productive.png"}
-          alt={"stay productive illustration image"}
-        />
-      </ImageContainer>
-      <TextWrapper>
-        <Title>Stay productive, wherever you are</Title>
-        <Desc>
-          Never let location be an issue when accessing your files. Fylo has you
-          covered for all your file storage needs.
-        </Desc>
-        <Desc>
-          Securely share files and folders with friends, family and colleagues
-          for live collaboration. No email attachments required.
-        </Desc>
+      <InView threshold={0.6} triggerOnce>
+        {({ inView, ref }) => (
+          <motion.div
+            ref={ref}
+            variants={imageContainerVariants}
+            initial="hidden"
+            animate={inView ? "visible" : "hidden"}
+          >
+            <ImageContainer offset={floatingOffset}>
+              <Image
+                src={"/frontendmentor_18/illustration-stay-productive.png"}
+                alt={"stay productive illustration image"}
+              />
+            </ImageContainer>
+          </motion.div>
+        )}
+      </InView>
 
-        <ClickableWrapper
-          href={"#"}
-          onClick={() => {
-            window.location = "#";
-          }}
-        >
-          <LinkWrapper>
-            <LinkText>See how Fylo works</LinkText>
-            <LinkIcon
-              src={"/frontendmentor_18/icon-arrow.svg"}
-              alt={"link arrow icon image"}
-            />
-          </LinkWrapper>
-        </ClickableWrapper>
-      </TextWrapper>
+      <InView threshold={0.6} triggerOnce>
+        {({ inView, ref }) => (
+          <motion.div
+            ref={ref}
+            variants={textWrapperVariants}
+            initial="hidden"
+            animate={inView ? "visible" : "hidden"}
+          >
+            <TextWrapper>
+              <Title>
+                {Array.from("Stay productive, wherever you are").map(
+                  (letter, index) => (
+                    <motion.span
+                      key={`title-${index}`}
+                      custom={{ index, inView }}
+                      initial="initial"
+                      animate={inView ? "animate" : "initial"}
+                      variants={letterAnimation}
+                    >
+                      {letter}
+                    </motion.span>
+                  )
+                )}
+              </Title>
+              <Desc>
+                Never let location be an issue when accessing your files. Fylo
+                has you covered for all your file storage needs.
+              </Desc>
+              <Desc>
+                Securely share files and folders with friends, family and
+                colleagues for live collaboration. No email attachments
+                required.
+              </Desc>
+
+              <ClickableWrapper
+                href={"#"}
+                onClick={() => {
+                  window.location = "#";
+                }}
+              >
+                <LinkWrapper>
+                  <LinkText>See how Fylo works</LinkText>
+                  <LinkIcon
+                    src={"/frontendmentor_18/icon-arrow.svg"}
+                    alt={"link arrow icon image"}
+                  />
+                </LinkWrapper>
+              </ClickableWrapper>
+            </TextWrapper>
+          </motion.div>
+        )}
+      </InView>
     </Wrapper>
   );
 }
