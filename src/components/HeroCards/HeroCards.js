@@ -2,6 +2,7 @@ import styled from "styled-components";
 import React, { useState, useEffect } from "react";
 import { motion, useAnimation } from "framer-motion";
 import { InView } from "react-intersection-observer";
+import { isMobile } from "react-device-detect";
 import { QUERIES } from "../constants";
 
 const Wrapper = styled.div`
@@ -19,6 +20,11 @@ const Wrapper = styled.div`
     max-width: 100%;
     gap: 72px;
   }
+
+  @media ${QUERIES.phoneAndSmaller} {
+    padding-top: 132px;
+    gap: 94px;
+  }
 `;
 
 const CardWrapper = styled.div`
@@ -29,6 +35,10 @@ const CardWrapper = styled.div`
   gap: 16px;
 
   ${(p) => (p.row === 2 ? "margin-top: -28px;" : "")}
+
+  @media ${QUERIES.phoneAndSmaller} {
+    gap: 20px;
+  }
 `;
 
 const CardImageContainer = styled.div`
@@ -47,16 +57,25 @@ const Title = styled.h2`
   font-weight: var(--font-weight-bold);
   font-size: ${16 / 16}rem;
   color: var(--color-white);
+
+  @media ${QUERIES.phoneAndSmaller} {
+    font-size: ${18 / 16}rem;
+  }
 `;
 
 const Desc = styled.span`
-  font-family: var(--font-secondary);
+  font-family: var(--font-primary);
   font-weight: var(--font-weight-regular);
   font-size: ${12 / 16}rem;
   color: var(--color-white);
   text-align: center;
   margin-top: -12px;
   max-width: 322px;
+
+  @media ${QUERIES.phoneAndSmaller} {
+    font-size: ${14 / 16}rem;
+    margin-top: -10px;
+  }
 `;
 
 const cardVariants = {
@@ -174,8 +193,12 @@ function HeroCards() {
     });
   }, [controls, cardWrappers]);
 
+  useEffect(() => {
+    handleInView(true);
+  }, []);
+
   return (
-    <InView as="div" threshold={0.6} onChange={handleInView}>
+    <InView as="div" threshold={isMobile ? 0.25 : 0.6} onChange={handleInView}>
       <Wrapper>
         {cardWrappers.map((card, index) => (
           <motion.div
@@ -188,8 +211,7 @@ function HeroCards() {
             {card.content}
           </motion.div>
         ))}
-      </Wrapper>
-      {/* 
+        {/* 
           <Wrapper>
         <CardWrapper>
             <CardImageContainer>
@@ -250,6 +272,7 @@ function HeroCards() {
           </CardWrapper> 
           </Wrapper>
           */}
+      </Wrapper>
     </InView>
   );
 }

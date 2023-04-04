@@ -18,6 +18,13 @@ const Wrapper = styled.footer`
   @media ${QUERIES.tabletAndSmaller} {
     align-items: center;
   }
+
+  @media ${QUERIES.phoneAndSmaller} {
+    padding-top: 240px;
+    padding-right: 32px;
+    padding-left: 32px;
+    align-items: start;
+  }
 `;
 
 const LogoContainer = styled.div`
@@ -49,13 +56,15 @@ const RowEntry = styled.div`
 `;
 
 const InfoIconContainer = styled.div`
-  width: 12px;
-  height: 12px;
+  flex-grow: 5;
+  width: max-content;
+  height: 100%;
 `;
 
 const InfoIcon = styled.img`
-  object-fit: cover;
-  width: 100%;
+  object-fit: contain;
+  width: 17px;
+  height: 17px;
 `;
 
 const EntryValue = styled.span`
@@ -64,6 +73,10 @@ const EntryValue = styled.span`
   font-weight: var(--font-weight-regular);
   color: var(--color-white);
   max-width: 285px;
+
+  @media ${QUERIES.phoneAndSmaller} {
+    font-size: ${14 / 16}rem;
+  }
 `;
 
 const EntryWrapper = styled.div`
@@ -75,11 +88,16 @@ const EntryWrapper = styled.div`
     align-self: center;
     width: 160px;
   }
+
+  @media ${QUERIES.phoneAndSmaller} {
+    align-self: start;
+    width: max-content;
+  }
 `;
 
 const NavEntry = styled.a`
   text-decoration: none;
-  font-family: var(--font-secondary);
+  font-family: var(--font-primary);
   font-weight: var(--font-weight-regular);
   font-size: ${12 / 16}rem;
   color: var(--color-white);
@@ -97,6 +115,10 @@ const NavEntry = styled.a`
       color: var(--color-cyan);
     }
   `)}
+
+  @media ${QUERIES.phoneAndSmaller} {
+    font-size: ${14 / 16}rem;
+  }
 `;
 
 const SocialWrapper = styled.div`

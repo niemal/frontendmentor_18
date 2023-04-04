@@ -2,6 +2,7 @@ import styled from "styled-components";
 import Button from "../Button";
 import ClickableWrapper from "../ClickableWrapper";
 import { useState, useRef } from "react";
+import { QUERIES } from "../constants";
 
 const Wrapper = styled.div`
   position: absolute;
@@ -18,6 +19,11 @@ const Wrapper = styled.div`
   gap: 16px;
   width: 666px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.18);
+
+  @media ${QUERIES.phoneAndSmaller} {
+    width: calc(100% - 48px);
+    padding: 32px 24px;
+  }
 `;
 
 const Title = styled.label`
@@ -41,6 +47,10 @@ const SignUpRow = styled.div`
   position: relative;
   display: flex;
   gap: 24px;
+
+  @media ${QUERIES.phoneAndSmaller} {
+    flex-direction: column;
+  }
 `;
 
 const Input = styled.input`
@@ -59,6 +69,10 @@ const Input = styled.input`
 
   &::placeholder {
     color: var(--color-dark-blue-intro);
+  }
+
+  @media ${QUERIES.phoneAndSmaller} {
+    width: 250px;
   }
 `;
 
@@ -104,6 +118,11 @@ function EmailSignUp() {
           aria-describedby={"email-error"}
           error={errorMessage.length > 0}
           placeholder={"email@example.com"}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              validateEmail();
+            }
+          }}
         />
         <ErrorMessage id={"email-error"} aria-live={"polite"}>
           {errorMessage}
@@ -113,7 +132,7 @@ function EmailSignUp() {
             validateEmail();
           }}
         >
-          <Button>Get Started For Free</Button>
+          <Button footer>Get Started For Free</Button>
         </ClickableWrapper>
       </SignUpRow>
     </Wrapper>

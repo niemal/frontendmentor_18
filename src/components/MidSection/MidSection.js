@@ -13,6 +13,11 @@ const Wrapper = styled.section`
   gap: 24px;
   margin-top: 132px;
   width: 100%;
+
+  @media ${QUERIES.phoneAndSmaller} {
+    margin-top: -232px;
+    padding-top: 232px;
+  }
 `;
 
 const BackgroundContainer = styled.div`
@@ -24,6 +29,10 @@ const BackgroundContainer = styled.div`
 
   @media ${QUERIES.tabletAndSmaller} {
     top: -230px;
+  }
+
+  @media ${QUERIES.phoneAndSmaller} {
+    top: -130px;
   }
 `;
 

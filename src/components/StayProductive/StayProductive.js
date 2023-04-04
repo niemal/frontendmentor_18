@@ -5,6 +5,7 @@ import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { InView } from "react-intersection-observer";
 import { useInterval } from "../useInterval";
+import { isMobile } from "react-device-detect";
 import { QUERIES } from "../constants";
 
 const Wrapper = styled.div`
@@ -23,6 +24,11 @@ const Wrapper = styled.div`
     flex-direction: column;
     gap: 32px;
   }
+
+  @media ${QUERIES.phoneAndSmaller} {
+    padding-top: 185px;
+    gap: 46px;
+  }
 `;
 
 const ImageContainer = styled.div`
@@ -31,12 +37,22 @@ const ImageContainer = styled.div`
   transition: all 1.5s ease-in-out;
 
   transform: translateY(${(p) => p.offset}px);
+
+  @media ${QUERIES.phoneAndSmaller} {
+    width: 333px;
+    height: 234px;
+  }
 `;
 
 const Image = styled.img`
   object-fit: cover;
   width: 500px;
   height: 380px;
+
+  @media ${QUERIES.phoneAndSmaller} {
+    width: 333px;
+    height: 234px;
+  }
 `;
 
 const TextWrapper = styled.div`
@@ -48,6 +64,11 @@ const TextWrapper = styled.div`
   @media ${QUERIES.tabletAndSmaller} {
     align-items: center;
   }
+
+  @media ${QUERIES.phoneAndSmaller} {
+    width: calc(100% - 48px);
+    max-width: 100%;
+  }
 `;
 
 const Title = styled.h1`
@@ -56,6 +77,12 @@ const Title = styled.h1`
   line-height: ${40 / 16}rem;
   color: var(--color-white);
   max-width: 280px;
+
+  @media ${QUERIES.phoneAndSmaller} {
+    font-size: ${17 / 16}rem;
+    line-height: ${26 / 16}rem;
+    width: 353px;
+  }
 `;
 
 const Desc = styled.span`
@@ -63,6 +90,12 @@ const Desc = styled.span`
   font-size: ${14 / 16}rem;
   line-height: ${16 / 16}rem;
   color: var(--color-white);
+
+  @media ${QUERIES.phoneAndSmaller} {
+    width: 333px;
+    margin-left: 48px;
+    line-height: ${20 / 16}rem;
+  }
 `;
 
 const LinkWrapper = styled.a`
@@ -89,6 +122,11 @@ const LinkWrapper = styled.a`
       border-color: var(--color-white);
     }
   `)}
+
+  @media ${QUERIES.phoneAndSmaller} {
+    align-self: start;
+    margin-left: 48px;
+  }
 `;
 
 const LinkText = styled.span`
@@ -149,7 +187,7 @@ function StayProductive() {
 
   return (
     <Wrapper>
-      <InView threshold={0.6} triggerOnce>
+      <InView threshold={isMobile ? 0.25 : 0.6} triggerOnce>
         {({ inView, ref }) => (
           <motion.div
             ref={ref}
@@ -167,7 +205,7 @@ function StayProductive() {
         )}
       </InView>
 
-      <InView threshold={0.6} triggerOnce>
+      <InView threshold={isMobile ? 0.25 : 0.6} triggerOnce>
         {({ inView, ref }) => (
           <motion.div
             ref={ref}

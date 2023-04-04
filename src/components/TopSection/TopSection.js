@@ -3,6 +3,8 @@ import Button from "../Button";
 import ClickableWrapper from "../ClickableWrapper";
 import { motion, AnimatePresence } from "framer-motion";
 import React, { useEffect, useState } from "react";
+import { isMobile } from "react-device-detect";
+import { QUERIES } from "../constants";
 
 const Wrapper = styled(motion.section)`
   margin-top: 48px;
@@ -15,11 +17,22 @@ const Wrapper = styled(motion.section)`
   max-width: 580px;
   text-align: center;
   z-index: 3;
+
+  @media ${QUERIES.phoneAndSmaller} {
+    max-width: calc(100% - 24px);
+    margin-top: 20px;
+    gap: 24px;
+  }
 `;
 
 const IllustrationContainer = styled(motion.div)`
   width: 580px;
   height: 434px;
+
+  @media ${QUERIES.phoneAndSmaller} {
+    width: calc(100% - 42px);
+    height: 234px;
+  }
 `;
 
 const Image = styled.img`
@@ -46,16 +59,22 @@ const ContentWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 24px;
+  gap: 16px;
   z-index: 5;
 `;
 
 const Title = styled.h1`
-  font-family: var(--font-primary);
+  font-family: var(--font-secondary);
   font-weight: var(--font-weight-bold);
   font-size: ${31 / 16}rem;
   line-height: ${46 / 16}rem;
   color: var(--color-white);
+
+  @media ${QUERIES.phoneAndSmaller} {
+    font-size: ${24 / 16}rem;
+    line-height: ${36 / 16}rem;
+    max-width: 320px;
+  }
 `;
 
 const TextDesc = styled.p`
@@ -65,11 +84,21 @@ const TextDesc = styled.p`
   font-size: ${16 / 16}rem;
   line-height: ${24 / 16}rem;
   max-width: 484px;
+
+  @media ${QUERIES.phoneAndSmaller} {
+    font-size: ${14 / 16}rem;
+    line-height: ${20 / 16}rem;
+    max-width: 300px;
+  }
 `;
 
 const ButtonWrapper = styled.div`
   margin-top: -16px;
   width: max-content;
+
+  @media ${QUERIES.phoneAndSmaller} {
+    margin-top: 0px;
+  }
 `;
 
 const fadeIn = {
@@ -121,8 +150,8 @@ const iconsAnimation = {
 };
 
 const getRandomPosition = () => {
-  const maxWidth = 580 / 2;
-  const maxHeight = 434 / 2;
+  const maxWidth = (!isMobile ? 580 : 333) / 2;
+  const maxHeight = (!isMobile ? 434 : 234) / 2;
   const x = Math.floor(Math.random() * maxWidth * 2) - maxWidth;
   const y = Math.floor(Math.random() * maxHeight * 2) - maxHeight;
   return { x, y };
@@ -186,7 +215,7 @@ function TopSection() {
           <motion.div>
             <Title>
               {Array.from(
-                "All your files in one secure location, accessible anywhere"
+                "All your files in one secure location, accessible anywhere."
               ).map((letter, index) => (
                 <motion.span
                   key={index}

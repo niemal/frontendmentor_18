@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { useInterval } from "../useInterval";
 import { useState } from "react";
+import { QUERIES } from "../constants";
 
 const Wrapper = styled.button`
   position: relative;
@@ -50,6 +51,17 @@ const Wrapper = styled.button`
     outline: 2px solid var(--color-white);
     outline-offset: 4px;
   }
+
+  @media ${QUERIES.phoneAndSmaller} {
+    width: 240px;
+
+    ${(p) =>
+      p.footer
+        ? `
+    width: 100%;
+    `
+        : ""}
+  }
 `;
 
 const GlassDecor = styled.div`
@@ -61,13 +73,24 @@ const GlassDecor = styled.div`
   background-color: var(--color-white-fade);
   border-radius: 24px;
   backdrop-filter: blur(10px);
+
+  @media ${QUERIES.phoneAndSmaller} {
+    width: 208px;
+
+    ${(p) =>
+      p.footer
+        ? `
+      width: 86%;
+    `
+        : ""}
+  }
 `;
 
 const ContentWrapper = styled.span`
   z-index: 3;
 `;
 
-function Button({ children, ...props }) {
+function Button({ children, footer, ...props }) {
   const rotation = [
     ["var(--color-cyan)", "var(--color-cyan)", "var(--color-blue)"],
     ["var(--color-cyan)", "var(--color-blue)", "var(--color-blue)"],
@@ -93,12 +116,13 @@ function Button({ children, ...props }) {
 
   return (
     <Wrapper
+      footer={footer}
       gradient={rotation[index]}
       gradient2={rotation[(index + 1) % rotation.length]}
       index={index}
       {...props}
     >
-      <GlassDecor />
+      <GlassDecor footer={footer} />
       <ContentWrapper>{children}</ContentWrapper>
     </Wrapper>
   );

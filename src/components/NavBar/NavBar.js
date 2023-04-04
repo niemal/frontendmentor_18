@@ -1,6 +1,7 @@
 import styled, { css } from "styled-components";
 import ClickableWrapper from "../ClickableWrapper";
 import { hoverSupported } from "../hoverSupported";
+import { QUERIES } from "../constants";
 
 const Wrapper = styled.section`
   position: relative;
@@ -11,6 +12,11 @@ const Wrapper = styled.section`
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  @media ${QUERIES.phoneAndSmaller} {
+    padding: 20px;
+    padding-top: 24px;
+  }
 `;
 
 const LogoContainer = styled.a`
@@ -24,6 +30,11 @@ const LogoContainer = styled.a`
     outline: 2px solid var(--color-white);
     outline-offset: 4px;
   }
+
+  @media ${QUERIES.phoneAndSmaller} {
+    width: 80px;
+    height: 32px;
+  }
 `;
 
 const LogoImage = styled.img`
@@ -36,6 +47,10 @@ const NavWrapper = styled.nav`
   gap: 48px;
   margin-top: -10px;
   margin-right: 4px;
+
+  @media ${QUERIES.phoneAndSmaller} {
+    gap: 24px;
+  }
 `;
 
 const HoverLine = styled.path`
@@ -45,6 +60,10 @@ const HoverLine = styled.path`
   stroke-dasharray: 70;
   stroke-dashoffset: 100;
   transition: all 0.3s ease-in-out;
+
+  @media ${QUERIES.phoneAndSmaller} {
+    display: none;
+  }
 `;
 
 const NavEntry = styled.a`
